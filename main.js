@@ -18,10 +18,12 @@
 
         /**
         * Makes individual div for each site. If subdata exists, loops through it in a recusrive manner and appends the div with subdata divs
+        * Takes parameters: arr (the Json data), bcColorNum (int for which color to use as a background color based on colorListForBG), id (id for div it's within. if null, assumes this is the top level div)
         */
         const HandleData = (arr, bgColorNum, id) => {
             arr.forEach((subItem)=>{
                 const siteDiv = document.createElement("div")
+
                 if (bgColorNum===4){bgColorNum=0}
                 siteDiv.setAttribute('id', subItem.id)
                 siteDiv.setAttribute('style', `background-color:${colorListForBG[bgColorNum]}`)
@@ -50,7 +52,12 @@
             })
         }
 
-        const setEveryDiv = async()=>{
+
+        /**
+        * runs getFromJsonServer, followed by HandleData with the Json from the server
+        * 
+        */
+        const setEveryDivWithServerData = async()=>{
             let theData = await getFromJsonServer()
             if (theData){
                 HandleData(theData, 0, null)
@@ -58,4 +65,4 @@
         }
 
 
-        setEveryDiv()
+        setEveryDivWithServerData()
