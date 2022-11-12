@@ -5,79 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce Test</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
     <style>
-            .main-site-box{border-radius: 10px;border: 2px solid green;padding: 10px; margin: 5px; float:left; }
-            .sub-site-box{border-radius: 10px;border: 2px solid green; margin: 5px; padding: 10px;}
     
     </style>
+    <script src="main.js"></script>
     <script>
-
-        /**
-        * gets all Json Data from a server. 
-        * returns {Dictionary} - all sites
-        */
-        const getFromJsonServer = async()=>{
-            let response = await fetch('./sites.json')
-            let data = await response.json()
-                if (response.status===200){
-                    return data}
-                else{
-                    alert(`${response.status}: ${response.statusText}`)
-                    return null      
-                    }
-        }
-
-        const colorListForBG =['#add8e6','#87ceeb', '#c0c0c0', '#f4a460']
-
-        /**
-        * Makes individual div for each site. If subdata exists, loops through it in a recusrive manner and appends the div with subdata divs
-        */
-        const HandleData = (lis, bgColorNum, id) => {
-            lis.forEach((subItem)=>{
-                const siteDiv = document.createElement("div")
-
-                siteDiv.setAttribute('id', subItem.id)
-                siteDiv.setAttribute('style', `background-color:${colorListForBG[bgColorNum]}`)
-
-                siteDiv.innerHTML = `
-    
-                                            <div class="site-info">
-                                                <p class="id-p">id: ${subItem.id}</p>
-                                                <p class="name-p">Site Name: ${subItem.name}</p>
-                                                <p class="anchor-p"><a href="https://${subItem.url}/" target="_blank">Site URL: ${subItem.name}</a></p>
-                                            </div>
-                                        `;
-
-                if (id){
-                    siteDiv.setAttribute('class', 'sub-site-box')
-                    document.getElementById(String(id)).appendChild(siteDiv)
-                }
-                else{
-                    siteDiv.setAttribute('class', 'main-site-box')
-                    document.body.appendChild(siteDiv)
-                }
-                console.log(subItem.subData)
-
-            
-                if (subItem.subData){
-                    HandleData(subItem.subData, (bgColorNum+1), subItem.id)
-                } 
-                console.log(`finished div #${subItem.id}`)
-            })
-            console.log('finished all')
-        }
-
-        const setEveryDiv = async()=>{
-            let theData = await getFromJsonServer()
-            if (theData){
-                HandleData(theData, 0, null)
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////////
-
-
-        setEveryDiv()
         
 
     </script>
