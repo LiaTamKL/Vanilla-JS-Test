@@ -1,2 +1,2 @@
-.main-site-box{border-radius: 10px;border: 2px solid green;padding: 10px; margin: 5px; float:left; }
-.sub-site-box{border-radius: 10px;border: 2px solid green; margin: 5px; padding: 10px;}
+.main-site-box{border-radius: 10px;border: 2px solid green;padding: 10px; margin: 5px; float:left; width:450px }
+.sub-site-box{border-radius: 10px;border: 2px solid green; margin: 5px; padding: 10px; width:70%;float: right; clear: both}
